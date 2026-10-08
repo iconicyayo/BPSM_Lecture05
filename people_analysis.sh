@@ -59,3 +59,49 @@ do
 
 ## read from the input file
 done < example_people_data.tsv
+
+## Question 4: Count people born in October and display their names and countries
+
+## initialise counter
+count=0
+
+## read each person from the file
+while read name email city birthday_day birthday_month birthday_year country
+do
+    ## check whether the person's birth month is October
+    if test "${birthday_month}" -eq 10
+    then
+        ## increase counter only for October birthdays
+        count=$((count+1))
+
+        ## display their name and country
+        echo -e "${name}\t${country}"
+    fi
+
+done < example_people_data.tsv
+
+## print total number of october birthdays
+
+echo "total october birthdays: ${count}"
+
+## still havent fixed issue with birthdays being in country columns so not rly accurate i guess and gives me "integer expected" errors
+
+
+## Question 5: q4 but output as multiple lists
+## set the counter to 0
+count=0
+
+## read each person from the file
+while read name email city birthday_day birthday_month birthday_year country
+do
+    ## check whether the person's birth month is october
+    if test "${birthday_month}" -eq 10
+    then
+        ## increase the counter only for october birthdays
+        count=$((count+1))
+
+        ## add the person's name and country to their country's file
+        echo -e "${name}\t${country}" >> "october_${country}.txt"
+    fi
+
+done < example_people_data.tsv
