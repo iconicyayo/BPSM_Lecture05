@@ -40,3 +40,22 @@ do
     fi
 
 done < example_people_data.tsv
+
+## Question 3: Create separate files for people from each country
+
+## read each line and assign the columns to variables
+while read name email city birthday_day birthday_month birthday_year country
+do
+    ## check that the current line isn't the header
+    if test "${name}" != "name"
+    then
+        ## check that the current line isn't blank
+        if test "${name}" != ""
+        then
+            ## move peoplen's name to their country's file
+            echo "${name}" >> "${country}.txt"
+        fi
+    fi
+
+## read from the input file
+done < example_people_data.tsv
